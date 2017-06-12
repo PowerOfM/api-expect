@@ -4,6 +4,9 @@ A simple input validation system designed for apis or form inputs. Supports cust
 ## Contents
 - [Installation](#installation)
 - [Usage](#usage)
+- [Middleware](#middleware)
+  + [Even More Convenient](#even-more-convenient)
+  + [Options](#options)
 - [Templates](#templates)
   + [Short-Hand](#short-hand)
   + [Array Short-Hand](#array-short-hand)
@@ -14,9 +17,6 @@ A simple input validation system designed for apis or form inputs. Supports cust
   + [Required By Default](#required-by-default)
   + [When Optional By Default](#when-optional-by-default)
 - [Validators](#validators)
-- [Middleware](#middleware)
-  + [Even More Convenient](#even-more-convenient)
-  + [Options](#options)
 - [Licence](#licence)
 
 ## Installation <a name="installation"></a>
@@ -38,6 +38,47 @@ var result = expect.exec(template, data)
 // result.error = false
 // result.output = { myField: 'someStuff' }
 ```
+
+
+## Middleware <a name="middleware"></a>
+APIExpect has a built-in ExpressJS middleware creator. It automatically compiles templates, then executes them for all data incoming data in its route.
+Usage:
+```js
+expect.middleware(template, source, options)
+```
+Where `template` is an uncompile template object, `source` is property of `req` that has the data, and `options` is an optional object of configuration.
+
+Example:
+```js
+const express = require('express')
+const expect = require('api-expect')
+
+var router = express.Router()
+
+router.post('/signup',
+  expect.middleware({ name: 'string:3', password: 'string:6' }, 'body')),
+  (req, res, next) => {
+    // req.data will have all validated data
+  }
+)
+```
+
+### Even More Convenient <a name="even-more-convenient"></a>
+Convenience functions are provided for the common data sources:
+```js
+expect.body(template) // same as expect.middleware(template, 'body')
+expect.query(template) // same as expect.middleware(template, 'query')
+expect.params(template) // same as expect.middleware(template, 'params')
+```
+All three functions also support `options` as a second parameter.
+
+### Options <a name="options"></a>
+Field       | Meaning                                               | Default
+------------|-------------------------------------------------------|---------
+destination | The field in `req` where the output should be placed. | 'data'
+dest        | Alias of `destination`                                | null
+inPlace     | When true, the output will replace the input data     | false
+
 
 ## Templates <a name="templates"></a>
 APIExpect was designed to limit tedium and make it easy to create validation templates on the fly. It supports 3 main style of templates: short-hand, array short-hand, and long-form. As you may have guessed, both short-hand forms are just convinence functions that expand to the long-form internally. The short-hand forms can only pass static arguments to the validators, so in circumstances where you must pass a variable or externally-defined constant, the long form is required. Below is a brief overview of the three forms.
@@ -122,8 +163,8 @@ const STATUSES = [ 'Active', 'Inactive', 'Disabled' ]
   status: { 'index', [false, STATUSES] },
   colour: '~string:3:50:black'
 }
+```
 Translation: "The `status` field should be a number >= 0 and < `STATUSES.length` but default to 0; and `colour` should be a string whose length is between 3 and 50, but default to 'black'".
-
 
 ### When Optional By Default <a name="when-optional-by-default"></a>
 When `defaultOptional` is `true`, all fields are optional by default. To make a specific field required, preappend an `*` (asterisk), as such:
@@ -152,45 +193,6 @@ There are a wealth of default validators that exist. All validators' first argum
 | index             | array | min | default
 | date              | min | max | default
 
-
-## Middleware <a name="middleware"></a>
-APIExpect has a built-in ExpressJS middleware creator. It automatically compiles templates, then executes them for all data incoming data in its route.
-Usage:
-```js
-expect.middleware(template, source, options)
-```
-Where `template` is an uncompile template object, `source` is property of `req` that has the data, and `options` is an optional object of configuration.
-
-Example:
-```js
-const express = require('express')
-const expect = require('api-expect')
-
-var router = express.Router()
-
-router.post('/signup',
-  expect.middleware({ name: 'string:3', password: 'string:6' }, 'body')),
-  (req, res, next) => {
-    // req.data will have all validated information
-  }
-)
-```
-
-### Even More Convenient <a name="even-more-convenient"></a>
-Convenience functions are provided for the common data sources:
-```js
-expect.body(template) // same as expect.middleware(template, 'body')
-expect.query(template) // same as expect.middleware(template, 'query')
-expect.params(template) // same as expect.middleware(template, 'params')
-```
-All three functions also support `options` as a second parameter.
-
-### Options <a name="options"></a>
-Field       | Meaning                                               | Default
-------------|-------------------------------------------------------|---------
-destination | The field in `req` where the output should be placed. | 'data'
-dest        | Alias of `destination`                                | null
-inPlace     | When true, the output will replace the input data     | false
 
 ## Licence <a name="licence"></a>
 Copyright &copy; 2017 Mesbah Mowlavi. All rights reserved.
