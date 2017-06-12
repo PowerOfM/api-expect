@@ -185,14 +185,14 @@ There are a wealth of default validators that exist. All validators' first argum
 |-------------------|------|------|------
 | object            | Uncompiled Template
 | array             | Validator | minLength | maxLength
-| string            | minLength | maxLength | default
-| html              | minLength | maxLength | default
-| email             | default
-| url               | default
-| bool              | default
-| number            | min | max | default
-| index             | array | min | default
-| date              | min | max | default
+| string            | minLength | maxLength | defaultValue
+| html              | minLength | maxLength | defaultValue
+| email             | defaultValue
+| url               | defaultValue
+| bool              | defaultValue
+| number            | min | max | defaultValue
+| index             | array | min | defaultValue
+| date              | min | max | defaultValue
 
 
 ## Licence <a name="licence"></a>
