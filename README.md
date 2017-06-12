@@ -194,6 +194,7 @@ There are a wealth of default validators that exist. All validators' first argum
 | index             | array | min | defaultValue
 | date              | min | max | defaultValue
 
+_Note:_ the `html` validator strips all tags except &lt;b&gt;, &lt;blockquote&gt;, &lt;code&gt;, &lt;del&gt;, &lt;dd&gt;, &lt;dl&gt;, &lt;dt&gt;, &lt;em&gt;, &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;i&gt;, &lt;li&gt;, &lt;ol&gt;, &lt;p&gt;, &lt;pre&gt;, &lt;s&gt;, &lt;sup&gt;, &lt;sub&gt;, &lt;strong&gt;, &lt;strike&gt;, &lt;ul&gt;, &lt;br&gt;, and &lt;hr&gt;, and removes all styling.
 
 ## Licence <a name="licence"></a>
 Copyright &copy; 2017 Mesbah Mowlavi. All rights reserved.

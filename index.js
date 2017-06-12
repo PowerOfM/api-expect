@@ -1,7 +1,13 @@
-const Sanitize = require('./sanitize')
+const XSS = require('xss')
 
 const IS_OPTIONAL_CHAR = '~'
 const IS_REQUIRED_CHAR = '*'
+
+var xssHTML = new XSS.FilterXSS({
+  whiteList: ['b', 'blockquote', 'code', 'del', 'dd', 'dl', 'dt', 'em', 'h1', 'h2', 'h3', 'i', 'li', 'ol', 'p', 'pre', 's', 'sup', 'sub', 'strong', 'strike', 'ul', 'br', 'hr'],
+  stripIgnoreTag: true,
+  stripIgnoreTagBody: ['script']
+})
 
 class APIExpect {
   constructor () {
@@ -241,7 +247,7 @@ Validators.string = function (req, min, max, def) {
   var msg = ' must be between ' + min + (max !== Infinity ? ' ' + max : '') + ' characters long.'
 
   return (v, f) => {
-    v = Sanitize.plainText(v)
+    v = XSS(v)
     var err = v.length < min || v.length > max
 
     return {
@@ -258,7 +264,7 @@ Validators.html = function (req, min, max, def) {
   max = Number(max) || STRING_MAX_LENGTH
 
   return (v, f) => {
-    v = Sanitize.html(v)
+    v = xssHTML.process(v)
     var err = v.length < min || v.length > max
 
     return {
