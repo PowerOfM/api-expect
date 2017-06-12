@@ -145,3 +145,45 @@ There are a wealth of default validators that exist. All validators' first argum
 | number            | min | max | default
 | index             | array | min | default
 | date              | min | max | default
+
+## Middleware
+APIExpect has a built-in ExpressJS middleware creator. It automatically compiles templates, then executes them for all data incoming data in its route.
+Usage:
+```js
+expect.middleware(template, source, options)
+```
+Where `template` is an uncompile template object, `source` is property of `req` that has the data, and `options` is an optional object of configuration.
+
+Example:
+```js
+const express = require('express')
+const expect = require('api-expect')
+
+var router = express.Router()
+
+router.post('/signup',
+  expect.middleware({ name: 'string:3', password: 'string:6' }, 'body')),
+  (req, res, next) => {
+    // req.data will have all validated information
+  }
+)
+```
+
+### Even More Convenient
+Convenience functions are provided for the common data sources:
+```js
+expect.body(template) // same as expect.middleware(template, 'body')
+expect.query(template) // same as expect.middleware(template, 'query')
+expect.params(template) // same as expect.middleware(template, 'params')
+```
+
+### Options
+Field       | Meaning                                               | Default
+------------|-------------------------------------------------------|---------
+destination | The field in `req` where the output should be placed. | 'data'
+dest        | Alias of `destination`                                | null
+inPlace     | When true, the output will replace the input data     | false
+
+## Licence
+Copyright &copy; 2017 Mesbah Mowlavi. All rights reserved.
+I'll think about open-source licencing later on...

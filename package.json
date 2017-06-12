@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "git@gitlab.com:powerofm/api-expect.git",
   "author": "Mesbah Mowlavi <m@ionx.ca>",
-  "license": "MIT",
+  "license": "",
   "dependencies": {
     "xss": "^0.3.3"
   }
