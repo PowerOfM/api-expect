@@ -21,7 +21,9 @@ A simple input validation system designed for apis or form inputs. Supports cust
 
 ## Installation <a name="installation"></a>
 Use Yarn to add APIExpect to your project:
-`yarn add api-expect`
+```
+yarn add api-expect
+```
 
 ## Usage <a name="usage"></a>
 APIExpect exports a singleton by default. Import the module and start creating templates!
