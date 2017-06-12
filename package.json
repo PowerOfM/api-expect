@@ -1,0 +1,12 @@
+{
+  "name": "api-expect",
+  "version": "1.0.0",
+  "description": "A simple input validation system designed for apis or form inputs. Supports custom validators and actually readable outputs.",
+  "main": "index.js",
+  "repository": "git@gitlab.com:powerofm/api-expect.git",
+  "author": "Mesbah Mowlavi <m@ionx.ca>",
+  "license": "MIT",
+  "dependencies": {
+    "xss": "^0.3.3"
+  }
+}
