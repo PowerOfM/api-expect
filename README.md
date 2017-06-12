@@ -30,10 +30,11 @@ APIExpect exports a singleton by default. Import the module and start creating t
 ```js
 const expect = require('api-expect')
 
-const template = expect.compile({ myField: 'string:3:50' })
+const template = { myField: 'string:3:50' }
+const compiledTemplate = expect.compile(template)
 
 var data = { myField: 'someStuff', _otherMetaField: 42 }
-var result = expect.exec(template, data)
+var result = expect.exec(compiledTemplate, data)
 
 // result.error = false
 // result.output = { myField: 'someStuff' }
