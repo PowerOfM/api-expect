@@ -14,6 +14,10 @@ A simple input validation system designed for apis or form inputs. Supports cust
   + [Required By Default](#required-by-default)
   + [When Optional By Default](#when-optional-by-default)
 - [Validators](#validators)
+- [Middleware](#middleware)
+  + [Even More Convenient](#even-more-convenient)
+  + [Options](#options)
+- [Licence](#licence)
 
 ## Installation <a name="installation"></a>
 Use Yarn to add APIExpect to your project:
@@ -34,7 +38,7 @@ var result = expect.exec(template, data)
 ```
 
 ## Templates <a name="templates"></a>
-APIExpect was designed to limit tedium and make it easy to create validation templates on the fly. It supports 3 main style of templates: short-hand, array short-hand, and long-form. As you may have guessed, both short-hand forms are just convinence functions that expand to the long-form internally. The short-hand forms can only pass static arguments (such as minimum/max string length) to the validators, so in circumstances where you must pass a variable or externally-defined constant, the long form is required. Below is a brief overview of the three forms.
+APIExpect was designed to limit tedium and make it easy to create validation templates on the fly. It supports 3 main style of templates: short-hand, array short-hand, and long-form. As you may have guessed, both short-hand forms are just convinence functions that expand to the long-form internally. The short-hand forms can only pass static arguments to the validators, so in circumstances where you must pass a variable or externally-defined constant, the long form is required. Below is a brief overview of the three forms.
 
 ### Short-Hand <a name="short-hand"></a>
 This is the most common form and is very handy for simple validation. The basic format is:
@@ -146,7 +150,8 @@ There are a wealth of default validators that exist. All validators' first argum
 | index             | array | min | default
 | date              | min | max | default
 
-## Middleware
+
+## Middleware <a name="middleware"></a>
 APIExpect has a built-in ExpressJS middleware creator. It automatically compiles templates, then executes them for all data incoming data in its route.
 Usage:
 ```js
@@ -169,21 +174,22 @@ router.post('/signup',
 )
 ```
 
-### Even More Convenient
+### Even More Convenient <a name="even-more-convenient"></a>
 Convenience functions are provided for the common data sources:
 ```js
 expect.body(template) // same as expect.middleware(template, 'body')
 expect.query(template) // same as expect.middleware(template, 'query')
 expect.params(template) // same as expect.middleware(template, 'params')
 ```
+All three functions also support `options` as a second parameter.
 
-### Options
+### Options <a name="options"></a>
 Field       | Meaning                                               | Default
 ------------|-------------------------------------------------------|---------
 destination | The field in `req` where the output should be placed. | 'data'
 dest        | Alias of `destination`                                | null
 inPlace     | When true, the output will replace the input data     | false
 
-## Licence
+## Licence <a name="licence"></a>
 Copyright &copy; 2017 Mesbah Mowlavi. All rights reserved.
 I'll think about open-source licencing later on...
