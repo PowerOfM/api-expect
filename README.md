@@ -47,7 +47,7 @@ This is the most common form and is very handy for simple validation. The basic 
   field: 'validator:arg1:arg2:arg3:...'
 }
 ```
-See the _Validators_ section for more information on the arguments.
+See the [Validators](#validators) section for more information on the arguments.
 
 Example:
 ```js
@@ -64,7 +64,7 @@ Similar to the short-hand form, this form combines the Array validator with any 
   field: ['validator:arg1:arg2:...', minLength, maxLength]
 }
 ```
-The `minLength` is optional and defaults to 0; `maxLength` is also optional and defaults to infinity. See the _Validators_ section for more information on the arguments.
+The `minLength` is optional and defaults to 0; `maxLength` is also optional and defaults to infinity. See the [Validators](#validators) section for more information on the arguments.
 
 Example:
 ```js
@@ -81,7 +81,7 @@ And when the convient methods fail to deliver, we resort to verbose measures. Th
   field: { 'validator': [arg1, arg2, arg3, ...] }
 }
 ```
-See the _Validators_ section for more information on the arguments.
+See the [Validators](#validators) section for more information on the arguments.
 
 Example:
 ```js
@@ -109,7 +109,7 @@ expect.defaultOptional = true
 // Make all fields required by default
 expect.defaultOptional = false
 ```
-**NOTE: If you change `defaultOptional` to be true, the short-hand behaviour changes!** (See _When Optional By Default_)
+**NOTE: If you change `defaultOptional` to be true, the short-hand behaviour changes!** (See [When Optional By Defaul](#when-optional-by-default))
 
 To make a specific field optional, insert the '~' field in a short-hand validator, or a boolean value for `required` as the first parameter for the array in an array-short-hand or long-form entry.
 Example:
