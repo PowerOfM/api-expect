@@ -1,6 +1,6 @@
 {
   "name": "api-expect",
-  "version": "1.1.22",
+  "version": "1.1.2",
   "description": "A simple input validation system designed for apis or form inputs. Supports custom validators and actually readable outputs.",
   "main": "index.js",
   "repository": "https://github.com/powerofm/api-expect",
