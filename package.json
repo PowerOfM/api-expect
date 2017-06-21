@@ -3,7 +3,7 @@
   "version": "1.1.1",
   "description": "A simple input validation system designed for apis or form inputs. Supports custom validators and actually readable outputs.",
   "main": "index.js",
-  "repository": "https://gitlab.com/powerofm/api-expect",
+  "repository": "https://github.com/powerofm/api-expect",
   "author": "Mesbah Mowlavi <m@ionx.ca>",
   "license": "MIT",
   "scripts": {
